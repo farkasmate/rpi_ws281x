@@ -1,0 +1,13 @@
+task :default => [:build]
+
+task :build do
+  Dir.chdir '..' do
+    sh 'scons'
+    sh 'gcc -shared -o rpi_ws281x.so dma.o mailbox.o pwm.o rpihw.o ws2811.o'
+  end
+end
+
+task :test do
+  sh 'sudo ruby ws281x.rb'
+end
+
